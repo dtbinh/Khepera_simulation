@@ -9,11 +9,23 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
+
 public class ControllerBehaviour extends CyclicBehaviour {
+    /**
+     * Last pv sent by the sensor.
+     */
+    private Long pv;
+
+    /**
+     * Last timestamp sent by the sensor.
+     */
+    private Long timestamp;
+
     public void action() {
 	/* receive the message */
 	ACLMessage msg = this.myAgent.receive();
@@ -34,12 +46,44 @@ public class ControllerBehaviour extends CyclicBehaviour {
 	    JSONObject json_content = (JSONObject)parsed_content;
 
 	    /* access and process the received values from the sensor */
-	    System.out.println("Controller: pv = " + json_content.get("pv")
-			       + ", timestamp = " + json_content.get("timestamp")
+	    this.pv = (Long)json_content.get("pv");
+	    this.timestamp = (Long)json_content.get("timestamp");
+	    System.out.println("Controller: pv = " + this.pv
+			       + ", timestamp = " + this.timestamp
 			       );
+
+	    /* send order to actuor */
+	    int order = this.determineOrder();
+	    this.sendOrder(order, this.timestamp);
 	}
 	else {
 	    block();
 	}
+    }
+
+    private int determineOrder() {
+	int order = 0;
+
+	if(this.pv > 50) {
+	    order = 1;
+	} else {
+	    order = 2;
+	}
+
+	return order;
+    }
+
+    private void sendOrder(int order, Long timestamp) {
+	/* send message */
+	ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+	msg.addReceiver(new AID("Khepera_sensor", AID.ISLOCALNAME)); // TODO
+
+	/* json formating */
+	JSONObject json_msg = new JSONObject();
+	json_msg.put("u", order);
+	json_msg.put("timestamp", this.timestamp);
+
+	msg.setContent(json_msg.toString());
+	myAgent.send(msg);
     }
 }
