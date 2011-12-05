@@ -19,7 +19,8 @@ public class ControllerBehaviour extends CyclicBehaviour {
     /**
      * Last pv sent by the sensor.
      */
-    private Long pv;
+    private Long pv1;
+    private Long pv2;
 
     /**
      * Last timestamp sent by the sensor.
@@ -46,9 +47,11 @@ public class ControllerBehaviour extends CyclicBehaviour {
 	    JSONObject json_content = (JSONObject)parsed_content;
 
 	    /* access and process the received values from the sensor */
-	    this.pv = (Long)json_content.get("pv");
+	    this.pv1 = (Long)json_content.get("pv1");
+	    this.pv2 = (Long)json_content.get("pv2");
 	    this.timestamp = (Long)json_content.get("timestamp");
-	    System.out.println("Controller: pv = " + this.pv
+	    System.out.println("Controller: pv1 = " + this.pv1
+			       + ", pv2 = " + this.pv1
 			       + ", timestamp = " + this.timestamp
 			       );
 
@@ -64,7 +67,7 @@ public class ControllerBehaviour extends CyclicBehaviour {
     private int determineOrder() {
 	int order = 0;
 
-	if(this.pv > 50) {
+	if(this.pv1 > this.pv2) {
 	    order = 1;
 	} else {
 	    order = 2;

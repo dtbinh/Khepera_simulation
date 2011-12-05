@@ -18,9 +18,11 @@ import java.util.Random;
 
 public class SensorBehaviour extends CyclicBehaviour {
     /* last measured value */
-    private int pv;
+    private int pv1;
+    private int pv2;
     /* difference between the two last measured values */
-    private int delta_pv;
+    private int delta_pv1;
+    private int delta_pv2;
     /* time interval between two measure (in seconds) */
     private int timestamp;
     /* TODO */
@@ -32,14 +34,18 @@ public class SensorBehaviour extends CyclicBehaviour {
     }
 
     public void action() {
-	int current_pv;
+	int current_pv1;
+	int current_pv2;
 
 	/* measure the current value */
 	// RANDOM
-	current_pv = (int)(Math.random() * 100); // replace by a real value 
+	Random generator = new Random();
+	current_pv1 = generator.nextInt(100); // replace by a real value 
+	current_pv2 = generator.nextInt(100); // replace by a real value 
 
 	/* update internal variables */
-	this.delta_pv = Math.abs(this.pv - current_pv);
+	this.delta_pv1 = Math.abs(this.pv1 - current_pv1);
+	this.delta_pv2 = Math.abs(this.pv2 - current_pv2);
 
 	/* send message */
 	ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
@@ -47,8 +53,10 @@ public class SensorBehaviour extends CyclicBehaviour {
 
 	/* json formating */
 	JSONObject json_msg = new JSONObject();
-	json_msg.put("pv", current_pv);
-	json_msg.put("delta_pv", this.delta_pv);
+	json_msg.put("pv1", current_pv1);
+	json_msg.put("pv2", current_pv2);
+	json_msg.put("delta_pv1", this.delta_pv1);
+	json_msg.put("delta_pv2", this.delta_pv2);
 	json_msg.put("timestamp", this.timestamp);
 	json_msg.put("status_word", this.status_word);
 
@@ -56,7 +64,8 @@ public class SensorBehaviour extends CyclicBehaviour {
 	myAgent.send(msg);
 
 	/* save the current pv */
-	this.pv = current_pv;
+	this.pv1 = current_pv1;
+	this.pv2 = current_pv2;
 
 	/* */
 	try {
