@@ -26,9 +26,9 @@ public class SensorBehaviour extends CyclicBehaviour {
     /* TODO */
     private int status_word;
 
-    public void SensorBehaviour() {
-	this.timestamp = 3;	// TODO: define it in a separate config file
+    public SensorBehaviour() {
 	super();
+	this.timestamp = 3;	// TODO: define it in a separate config file
     }
 
     public void action() {
@@ -60,7 +60,7 @@ public class SensorBehaviour extends CyclicBehaviour {
 
 	/* */
 	try {
-	    Thread.sleep(TIMESTAMP * 1000);
+	    Thread.sleep(timestamp * 1000);
 	} catch(InterruptedException e) {
 	    System.out.println("osef");
 	}
