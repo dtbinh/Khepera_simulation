@@ -34,7 +34,9 @@ public class ControllerBehaviour extends CyclicBehaviour {
 	    JSONObject json_content = (JSONObject)parsed_content;
 
 	    /* access and process the received values from the sensor */
-	    System.out.println("Controller: pv = " + json_content.get("pv"));
+	    System.out.println("Controller: pv = " + json_content.get("pv")
+			       + ", timestamp = " + json_content.get("timestamp")
+			       );
 	}
 	else {
 	    block();
