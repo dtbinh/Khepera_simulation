@@ -21,10 +21,15 @@ public class SensorBehaviour extends CyclicBehaviour {
     private int pv;
     /* difference between the two last measured values */
     private int delta_pv;
-    /* time interval between two measure */
+    /* time interval between two measure (in seconds) */
     private int timestamp;
     /* TODO */
     private int status_word;
+
+    public void SensorBehaviour() {
+	this.timestamp = 3;	// TODO: define it in a separate config file
+	super();
+    }
 
     public void action() {
 	int current_pv;
@@ -55,7 +60,7 @@ public class SensorBehaviour extends CyclicBehaviour {
 
 	/* */
 	try {
-	    Thread.sleep(3000);
+	    Thread.sleep(TIMESTAMP * 1000);
 	} catch(InterruptedException e) {
 	    System.out.println("osef");
 	}
