@@ -13,6 +13,10 @@ Contents:
 
    install.rst
    architecture.rst
+   world.rst
+   sensor.rst
+   controller.rst
+   actuator.rst
 
 .. seealso::
 
