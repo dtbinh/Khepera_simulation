@@ -50,6 +50,7 @@ def doc(target='html', browse_='no'):
     if browse_.lower() in ('yes', 'y'):
         browse(target)
 
+@task
 def browse(target='html'):
     """
     Browse the documentation.
