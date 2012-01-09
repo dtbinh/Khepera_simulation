@@ -1,6 +1,0 @@
-\select@language {english}
-\contentsline {chapter}{\numberline {1}Install}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Build instructions}{3}{section.1.1}
-\contentsline {chapter}{\numberline {2}Architecture}{5}{chapter.2}
-\contentsline {section}{\numberline {2.1}Sensor - Controller - Actuator}{5}{section.2.1}
-\contentsline {chapter}{\numberline {3}Indices and tables}{7}{chapter.3}
