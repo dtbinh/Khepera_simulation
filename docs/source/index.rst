@@ -6,8 +6,6 @@
 Welcome to Khepera simulation's documentation!
 ==============================================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 
@@ -22,13 +20,4 @@ Contents:
 
    The **Khepera simulation** project use the JADE_ Framework.
 
-   .. _JADE: http://changeme
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
+   .. _JADE: http://jade.tilab.com/
