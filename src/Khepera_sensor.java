@@ -4,7 +4,8 @@ public class Khepera_sensor extends Agent {
     protected void setup() {
 	System.out.println("Sensor creation!");
 
-	this.addBehaviour(new SensorBehaviour());
-	this.addBehaviour(new ActuatorBehaviour());
+	World world = new World();
+	this.addBehaviour(new SensorBehaviour(world));
+	this.addBehaviour(new ActuatorBehaviour(world));
     }
 }

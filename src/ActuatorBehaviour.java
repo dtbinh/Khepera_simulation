@@ -8,12 +8,19 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import jade.core.Agent;
+import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
 public class ActuatorBehaviour extends CyclicBehaviour {
-    public ActuatorBehaviour () {
+    private int lastMove;
+    private World world;
+
+    public ActuatorBehaviour(World world) {
 	super();
+
+	this.world = world;
+	this.lastMove = 0;
     }
 
     public void action() {
@@ -35,10 +42,18 @@ public class ActuatorBehaviour extends CyclicBehaviour {
 
 	    JSONObject json_content = (JSONObject)parsed_content;
 
-	    /* access and process the received values from the sensor */
-	    System.out.println("Actuator: u = " + json_content.get("u")
-			       + ", timestamp = " + json_content.get("timestamp")
-			       );
+	    /* access and process the received values from the controller */
+	    try {
+		long u = (Long)json_content.get("u");
+		System.out.println("Actuator: u = " + u
+				   + ", timestamp = " + json_content.get("timestamp")
+				   );
+
+		/* actualize the state of the world */
+		this.world.move(u);
+	    } catch(java.lang.NullPointerException e) {
+		System.out.println("no value");
+	    }
 	}
 	else {
 	    block();

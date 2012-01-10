@@ -8,6 +8,8 @@
  * - answer : int, bool, (int, int)
  */
 
+import java.util.Vector;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -19,10 +21,30 @@ import jade.lang.acl.ACLMessage;
 
 
 public class WorldBehaviour extends CyclicBehaviour {
+    /**
+     * The position of the agent in the World.
+     */
+    private long pos;
+
+    public WorldBehaviour() {
+	super();
+
+	/* We initialize the position at 50.
+	 * The goal of the simulation is to move the agent to the
+	 * position 0.
+	 */
+	this.pos = 50;
+
+	/* draw interface */
+    }
+
     public void action() {
 	/* receive a message */
 	ACLMessage msg = this.myAgent.receive();
 	if (msg != null) {
+	    long move = 0;
+	    String action = "";
+
 	    /* parse the json message */
 
 	    // to optimize performance we can avoid this object
@@ -39,23 +61,37 @@ public class WorldBehaviour extends CyclicBehaviour {
 	    JSONObject json_content = (JSONObject)parsed_content;
 
 	    /* access and process the received values */
+	    action = (String)json_content.get("action");
 
-	    // this.pv1 = (Long)json_content.get("pv1");
-	    // this.pv2 = (Long)json_content.get("pv2");
-	    // this.timestamp = (Long)json_content.get("timestamp");
-	    // System.out.println("Controller: pv1 = " + this.pv1
-	    // 		       + ", pv2 = " + this.pv1
-	    // 		       + ", timestamp = " + this.timestamp
-	    // 		       );
+	    if(action == "move") {
+		move = (Long)json_content.get("move");
+	    } else if(action == "get_pos") {
+		this.sendPos();
+	    }
 
-	    /* answer */
-
-	    // int order = this.determineOrder();
-	    // this.sendOrder(order, this.timestamp);
+	    this.move(move);
 	}
 	else {
 	    block();
 	}
     }
 
+    private void move(long move) {
+	this.pos += move;
+
+	/* redraw */
+    }
+
+    private void sendPos() {
+	/* send message */
+	ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+	msg.addReceiver(new AID("Khepera_sensor", AID.ISLOCALNAME)); // TODO
+
+	/* json formating */
+	JSONObject json_msg = new JSONObject();
+	json_msg.put("pos", this.pos);
+
+	msg.setContent(json_msg.toString());
+	myAgent.send(msg);
+    }
 }

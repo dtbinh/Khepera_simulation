@@ -11,36 +11,44 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import java.util.Map;
 
 import java.lang.Math;
 import java.util.Random;
 
 public class SensorBehaviour extends CyclicBehaviour {
-    /* last measured value */
-    private int pv1;
-    private int pv2;
-    /* difference between the two last measured values */
-    private int delta_pv1;
-    private int delta_pv2;
-    /* time interval between two measure (in seconds) */
-    private int timestamp;
-    /* TODO */
-    private int status_word;
+    /* world representation */
+    private World world;
 
-    public SensorBehaviour() {
+    /* last measured value */
+    private long pv1;
+    private long pv2;
+    /* difference between the two last measured values */
+    private long delta_pv1;
+    private long delta_pv2;
+    /* time interval between two measure (in seconds) */
+    private long timestamp;
+    /* TODO */
+    private long status_word;
+
+    public SensorBehaviour(World world) {
 	super();
-	this.timestamp = 3;	// TODO: define it in a separate config file
+	this.timestamp = 1;	// TODO: define it in a separate config file
+
+	this.world = world;
     }
 
     public void action() {
-	int current_pv1;
-	int current_pv2;
+	long current_pv1;
+	long current_pv2;
 
 	/* measure the current value */
 	// RANDOM
 	Random generator = new Random();
-	current_pv1 = generator.nextInt(100); // replace by a real value 
+	current_pv1 = this.world.getPos();
+	//current_pv1 = generator.nextInt(100); // replace by a real value 
 	current_pv2 = generator.nextInt(100); // replace by a real value 
 
 	/* update internal variables */
@@ -73,5 +81,12 @@ public class SensorBehaviour extends CyclicBehaviour {
 	} catch(InterruptedException e) {
 	    System.out.println("osef");
 	}
+    }
+
+
+    private void move(long move) {
+	this.world.move(move);
+
+	/* redraw */
     }
 }

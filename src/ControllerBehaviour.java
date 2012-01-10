@@ -51,12 +51,12 @@ public class ControllerBehaviour extends CyclicBehaviour {
 	    this.pv2 = (Long)json_content.get("pv2");
 	    this.timestamp = (Long)json_content.get("timestamp");
 	    System.out.println("Controller: pv1 = " + this.pv1
-			       + ", pv2 = " + this.pv1
+			       + ", pv2 = " + this.pv2
 			       + ", timestamp = " + this.timestamp
 			       );
 
 	    /* send order to actuor */
-	    int order = this.determineOrder();
+	    long order = this.determineOrder();
 	    this.sendOrder(order, this.timestamp);
 	}
 	else {
@@ -64,19 +64,19 @@ public class ControllerBehaviour extends CyclicBehaviour {
 	}
     }
 
-    private int determineOrder() {
-	int order = 0;
+    private long determineOrder() {
+	long order = 0;
 
-	if(this.pv1 > this.pv2) {
+	if(this.pv1 > 0) {
+	    order = -1;
+	} else if(this.pv1 < 0) {
 	    order = 1;
-	} else {
-	    order = 2;
 	}
 
 	return order;
     }
 
-    private void sendOrder(int order, Long timestamp) {
+    private void sendOrder(long order, Long timestamp) {
 	/* send message */
 	ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
 	msg.addReceiver(new AID("Khepera_sensor", AID.ISLOCALNAME)); // TODO
