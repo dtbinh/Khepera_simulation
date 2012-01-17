@@ -9,7 +9,11 @@ action to proceed to the **Actuator Agent**.
 Functionning
 ------------
 
-To complete
+The goal of the controller is to consider messages from the sensor and
+to decide what to do based on these messages.
+
+Then, the controller has to send its decision to the actuator which
+will execute it.
 
 Message: TCA
 ------------
@@ -22,3 +26,12 @@ Content::
 	"u": action_to_proceed,
 	"timestamp": timestamp_integer
 	}
+
+Simulation
+----------
+
+In our case, the controller will receive the message from the sensor,
+it will decide in which direction the sensor/actuator agent must go
+and how long it has to move.
+
+Then the controller will send its order to the actuator.

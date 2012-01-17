@@ -12,12 +12,9 @@ Welcome to Khepera simulation's documentation!
    install.rst
    architecture.rst
    world.rst
+   simulation.rst
    sensor.rst
    controller.rst
    actuator.rst
-
-.. seealso::
-
-   The **Khepera simulation** project use the JADE_ Framework.
-
-   .. _JADE: http://jade.tilab.com/
+   jade_gui.rst
+   conclusion.rst

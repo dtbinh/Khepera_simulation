@@ -9,11 +9,7 @@ Functionning
 
 In this simulation the measurements are not extracted from the
 realworld, instead (to simplify the programming) we request the
-**World** agent about a simulated representation of the world.
-
-So, to measure a given world parameter (distance, temperature ...),
-the **Sensor Agent** has to send a request (GET_POSITION, ...) to the
-**World Agent** and to wait for the answer.
+**World** about a simulated representation of the world.
 
 One it has collected some measurements, the **Sensor Agent** send it
 to the **Controller Agent**.
@@ -32,3 +28,9 @@ Content::
 	"timestamp": timestamp_integer,
 	...
 	}
+
+Simulation
+----------
+
+In our case the sensor will measure the distance between the
+destination point and the sensor/actuator robot.

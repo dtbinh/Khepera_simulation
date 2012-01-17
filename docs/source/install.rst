@@ -22,6 +22,13 @@ You can (re)build the project by running the following commands::
     portable, so you can use it on every Java-supported platform.
 
 
+.. seealso::
+
+   The **Khepera simulation** project use the JADE_ Framework.
+
+   .. _JADE: http://jade.tilab.com/
+
+
 The documentation have been produced using the tool *Sphinx*. You can
 download it for free on the `sphinx website`_.
 
