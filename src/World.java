@@ -1,3 +1,8 @@
+/*
+ * TODO:
+ * - gerer les acces concurrents (lock)
+ * - sortir les chiffres magic du code
+ */
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -27,7 +32,7 @@ public class World extends JFrame {
 
     public void move(long move) {
 	// TODO gerer acces concurent
-	if(move > 0) {
+	if(move > 0) {		// TODO factoriser tout ca
 	    for(int i = (int)this.pos * 30 + 390; i < (this.pos + move) * 30 + 390; ++i) {
 		worldGraphic.setPosX(i);
 		worldGraphic.repaint();

@@ -4,3 +4,16 @@ The goal of this project is to simulate the comportement
 of Khepera robots and exploit it to try different kind
 of algorithm.
 
+Build and execute the project:
+
+  $ make
+  $ make run
+
+Build the documentation:
+
+  $ cd docs
+  $ make html
+  $ make latexpdf
+
+The documentation is build in docs/build/html and docs/build/latex.
+

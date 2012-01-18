@@ -10,7 +10,7 @@ and **JRE**). If not, you can download it for free on the `official Java website
 .. _`official Java website`: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 
-You can (re)build the project by running the following commands::
+You can (re)build the project and execute it by running the following commands::
 
     $ make build
     $ make run
@@ -20,13 +20,6 @@ You can (re)build the project by running the following commands::
     *make* is a standard Unix utility. You can find it on every Unix
     system (Linux for example). Since the project is Java-based, it's
     portable, so you can use it on every Java-supported platform.
-
-
-.. seealso::
-
-   The **Khepera simulation** project use the JADE_ Framework.
-
-   .. _JADE: http://jade.tilab.com/
 
 
 The documentation have been produced using the tool *Sphinx*. You can
@@ -43,3 +36,10 @@ reading) by running the following commands::
 
 The documentation is built in the directories
 *docs/build/html/index.html* and *docs/build/latex*.
+
+
+.. seealso::
+
+   The **Khepera simulation** project use the JADE_ Framework.
+
+   .. _JADE: http://jade.tilab.com/

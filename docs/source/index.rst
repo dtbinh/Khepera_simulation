@@ -9,6 +9,7 @@ Welcome to Khepera simulation's documentation!
 .. toctree::
    :maxdepth: 2
 
+   thanks.rst
    install.rst
    architecture.rst
    world.rst
